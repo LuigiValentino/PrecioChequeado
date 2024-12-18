@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrecioChequeado - Calculadora de Compras</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <header class="bg-yellow-400 p-6 text-center shadow-md">
+        <h1 class="text-3xl font-bold text-gray-900">PrecioChequeado</h1>
+        <p class="text-gray-700">Calculá impuestos y costos de importación para tus compras internacionales.</p>
+    </header>
+
+    <main class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-md max-w-3xl flex-grow">
+        <div id="cotizacion" class="mb-6 text-gray-700">
+            <h2 class="text-lg font-semibold mb-2">Cotización del Dólar</h2>
+            <div class="flex justify-between">
+                <p><i class="fas fa-dollar-sign"></i> Dólar Oficial: <span id="dolarOficial" class="font-bold text-gray-800">Cargando...</span> ARS</p>
+                <p><i class="fas fa-dollar-sign"></i> Dólar Blue: <span id="dolarBlue" class="font-bold text-gray-800">Cargando...</span> ARS</p>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold mb-2">Reglas Generales</h2>
+            <ul class="list-disc ml-6 text-gray-600 leading-relaxed">
+                <li>El cálculo es aproximado y puede variar según la cotización oficial.</li>
+                <li>Se cobran aranceles al exceder los <strong>USD 400</strong> por compra.</li>
+                <li>Pagás IVA (21%) e impuestos adicionales si corresponden.</li>
+            </ul>
+        </div>
+
+        <h2 class="text-lg font-semibold mb-4">Elegí cómo calcular el precio</h2>
+        <div class="flex gap-4">
+            <label>
+                <input type="radio" name="tipoEntrada" value="link" checked onchange="cambiarOpcion()" class="mr-2">
+                Pegar link de Mercado Libre
+            </label>
+            <label>
+                <input type="radio" name="tipoEntrada" value="manual" onchange="cambiarOpcion()" class="mr-2">
+                Ingresar precio manualmente
+            </label>
+        </div>
+
+        <div id="campoLink" class="mt-4">
+            <label for="linkML" class="block font-medium mb-2">Pega el link del producto:</label>
+            <input type="text" id="linkML" class="w-full p-2 border rounded" placeholder="Ej: https://articulo.mercadolibre.com.ar/MLA12345">
+        </div>
+
+        <div id="campoManual" class="mt-4 hidden">
+            <label for="precioManual" class="block font-medium mb-2">Precio en ARS:</label>
+            <input type="text" id="precioManual" class="w-full p-2 border rounded" placeholder="Ej: 554.739 o 554739">
+        </div>
+
+        <div class="text-center mt-6">
+            <button onclick="obtenerPrecio()" class="bg-yellow-400 text-gray-900 font-bold py-2 px-6 rounded hover:bg-yellow-500 transition">
+                <i class="fas fa-calculator mr-2"></i> Calcular Precio Final
+            </button>
+        </div>
+
+        <div id="resultado" class="mt-6 p-4 bg-gray-50 rounded hidden"></div>
+
+        <div class="mt-8 bg-gray-50 p-4 rounded">
+            <h2 class="text-lg font-semibold text-gray-800 mb-2">Información Importante</h2>
+            <p class="text-gray-600 leading-relaxed">
+                En <strong>Mercado Libre</strong>, podés comprar productos internacionales con las siguientes condiciones:
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-600 leading-relaxed">
+                <li>Podés comprar hasta <strong>3 unidades</strong> del mismo producto.</li>
+                <li>Cada envío no debe superar los <strong>USD 3.000</strong> ni los <strong>50 kg</strong> de peso.</li>
+                <li>Tenés un límite de <strong>5 envíos internacionales</strong> por año.</li>
+                <li>Es necesario contar con <strong>clave fiscal nivel 2</strong> o superior.</li>
+                <li>Deberás pagar <strong>IVA (21%)</strong> e impuestos internos si corresponden.</li>
+                <li>Se aplican <strong>aranceles de importación</strong> si el valor excede <strong>USD 400</strong> por compra.</li>
+            </ul>
+            <p class="mt-4 text-gray-600">
+                Los precios calculados en esta página son <strong>aproximados</strong> y pueden variar. Se recomienda consultar información oficial en 
+                <a href="https://www.arba.gov.ar" class="text-blue-500 underline" target="_blank">ARBA</a> y verificar los costos finales con la tienda correspondiente.
+            </p>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-4 mt-auto">
+        <p>&copy; 2024 PrecioChequeado. <a href="https://luigiadducci.netlify.app" class="text-blue-500">Luigi Adducci</a>.</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
